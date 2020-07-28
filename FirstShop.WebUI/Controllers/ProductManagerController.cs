@@ -11,13 +11,13 @@ namespace FirstShop.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        ProductRepository productRepository;
-        ProductCategoryRepository productCategories;
+        InMemoryRepository<Product> productRepository;
+        InMemoryRepository<ProductCategory> productCategories;
 
         public ProductManagerController()
         {
-            productRepository = new ProductRepository();
-            productCategories = new ProductCategoryRepository();
+            productRepository = new InMemoryRepository<Product>();
+            productCategories = new InMemoryRepository<ProductCategory>();
         }
         // GET: ProductManager
         public ActionResult Index()
