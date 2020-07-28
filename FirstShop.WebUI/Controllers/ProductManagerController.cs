@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FirstShop.Core.Contracts;
 using FirstShop.Core.Models;
 using FirstShop.Core.ViewModels;
 using FirstShop.DataAccess.InMemory;
@@ -11,13 +12,13 @@ namespace FirstShop.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        InMemoryRepository<Product> productRepository;
-        InMemoryRepository<ProductCategory> productCategories;
+        IRepository<Product> productRepository;
+        IRepository<ProductCategory> productCategories;
 
-        public ProductManagerController()
+        public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
         {
-            productRepository = new InMemoryRepository<Product>();
-            productCategories = new InMemoryRepository<ProductCategory>();
+            productRepository = productContext;
+            productCategories = productCategoryContext;
         }
         // GET: ProductManager
         public ActionResult Index()

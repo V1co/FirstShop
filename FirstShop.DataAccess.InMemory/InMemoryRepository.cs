@@ -1,4 +1,5 @@
-﻿using FirstShop.Core.Models;
+﻿using FirstShop.Core.Contracts;
+using FirstShop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FirstShop.DataAccess.InMemory
 {
-    public class InMemoryRepository<T> where T : BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
@@ -69,8 +70,8 @@ namespace FirstShop.DataAccess.InMemory
         }
 
         public void Delete(string Id)
-        { 
-        T tToDelete = items.Find(i => i.Id == Id);
+        {
+            T tToDelete = items.Find(i => i.Id == Id);
 
             if (tToDelete != null)
             {
