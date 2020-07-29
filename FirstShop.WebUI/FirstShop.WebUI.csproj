@@ -201,6 +201,10 @@
     <Compile Include="Migrations\202007291107418_Third.Designer.cs">
       <DependentUpon>202007291107418_Third.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007291200131_AddBasket.cs" />
+    <Compile Include="Migrations\202007291200131_AddBasket.Designer.cs">
+      <DependentUpon>202007291200131_AddBasket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -413,6 +417,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202007291107418_Third.resx">
       <DependentUpon>202007291107418_Third.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007291200131_AddBasket.resx">
+      <DependentUpon>202007291200131_AddBasket.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
