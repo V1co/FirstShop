@@ -1,3 +1,4 @@
+using FirstShop.Core.Contracts;
 using FirstShop.Core.Models;
 using FirstShop.DataAccess.SQL;
 using System;

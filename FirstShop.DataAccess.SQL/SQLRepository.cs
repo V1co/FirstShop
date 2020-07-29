@@ -1,4 +1,5 @@
-﻿using FirstShop.Core.Models;
+﻿using FirstShop.Core.Contracts;
+using FirstShop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,6 +11,7 @@ namespace FirstShop.DataAccess.SQL
 {
     public class SQLRepository<T> : IRepository<T> where T : BaseEntity
     {
+
         internal DataContext context;
         internal DbSet<T> dbSet;
 
@@ -36,7 +38,7 @@ namespace FirstShop.DataAccess.SQL
                 dbSet.Attach(t);
 
             dbSet.Remove(t);
-            
+
         }
 
         public T Find(string Id)
@@ -54,10 +56,5 @@ namespace FirstShop.DataAccess.SQL
             dbSet.Attach(t);
             context.Entry(t).State = EntityState.Modified;
         }
-
-    }
-
-    public interface IRepository<T> where T : BaseEntity
-    {
     }
 }
