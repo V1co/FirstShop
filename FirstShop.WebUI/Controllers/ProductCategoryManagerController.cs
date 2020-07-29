@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FirstShop.Core.Contracts;
 using FirstShop.Core.Models;
 using FirstShop.DataAccess.InMemory;
 
@@ -10,18 +11,18 @@ namespace FirstShop.WebUI.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
-        InMemoryRepository<ProductCategory> productCategoryRepository;
+        IRepository<ProductCategory> productCategories;
 
-        public ProductCategoryManagerController()
+        public ProductCategoryManagerController(IRepository<ProductCategory> productCategoryRepository)
         {
-            productCategoryRepository = new InMemoryRepository<ProductCategory>();
+            productCategories = productCategoryRepository;
         }
         // GET: ProductManager
         public ActionResult Index()
         {
-            List<ProductCategory> products = productCategoryRepository.Collection().ToList();
+            List<ProductCategory> productCategoryRepository = productCategories.Collection().ToList();
 
-            return View(products);
+            return View(productCategoryRepository);
         }
 
         public ActionResult Create()
@@ -39,8 +40,8 @@ namespace FirstShop.WebUI.Controllers
             }
             else
             {
-                productCategoryRepository.Insert(productCategory);
-                productCategoryRepository.Commit();
+                productCategories.Insert(productCategory);
+                productCategories.Commit();
 
                 return RedirectToAction("Index");
             }
@@ -50,7 +51,7 @@ namespace FirstShop.WebUI.Controllers
         public ActionResult Edit(string Id)
         {
 
-            ProductCategory productCategory = productCategoryRepository.Find(Id);
+            ProductCategory productCategory = productCategories.Find(Id);
             if (productCategory == null)
             {
                 return HttpNotFound();
@@ -65,7 +66,7 @@ namespace FirstShop.WebUI.Controllers
         [HttpPost]
         public ActionResult Edit(ProductCategory productCategory, string Id)
         {
-            ProductCategory productCategoryToEdit = productCategoryRepository.Find(Id);
+            ProductCategory productCategoryToEdit = productCategories.Find(Id);
 
             if (productCategoryToEdit == null)
             {
@@ -80,7 +81,7 @@ namespace FirstShop.WebUI.Controllers
 
                 productCategoryToEdit.Category = productCategory.Category;
 
-                productCategoryRepository.Commit();
+                productCategories.Commit();
 
                 return RedirectToAction("Index");
             }
@@ -88,7 +89,7 @@ namespace FirstShop.WebUI.Controllers
 
         public ActionResult Delete(string Id)
         {
-            ProductCategory productCategoryToDelete = productCategoryRepository.Find(Id);
+            ProductCategory productCategoryToDelete = productCategories.Find(Id);
 
             if (productCategoryToDelete == null)
             {
@@ -104,7 +105,7 @@ namespace FirstShop.WebUI.Controllers
         [ActionName("Delete")]
         public ActionResult ConfirmDelete(string Id)
         {
-            ProductCategory productCategoryToDelete = productCategoryRepository.Find(Id);
+            ProductCategory productCategoryToDelete = productCategories.Find(Id);
 
             if (productCategoryToDelete == null)
             {
@@ -112,8 +113,8 @@ namespace FirstShop.WebUI.Controllers
             }
             else
             {
-                productCategoryRepository.Delete(Id);
-                productCategoryRepository.Commit();
+                productCategories.Delete(Id);
+                productCategories.Commit();
                 return RedirectToAction("Index");
             }
         }

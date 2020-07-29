@@ -1,5 +1,6 @@
 ﻿using FirstShop.Core.Contracts;
 using FirstShop.Core.Models;
+using FirstShop.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,28 @@ namespace FirstShop.WebUI.Controllers
             productCategories = productCategoryContext;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string Category = null)
         {
-            List<Product> products = productRepository.Collection().ToList();
-            return View(products);
+            List<Product> products;
+            List<ProductCategory> categories = productCategories.Collection().ToList();
+
+            if (categories == null)
+            {
+                products = productRepository.Collection().ToList();
+            }
+            else
+            {
+                products = productRepository.Collection().Where(p => p.Category == Category).ToList();
+            }
+
+            ProductListViewModel model = new ProductListViewModel();
+            model.Products = products;
+            model.ProductCategories = categories;
+
+            return View(model);
         }
+
+        
 
         public ActionResult Details(string Id)
         {
