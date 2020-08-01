@@ -9,6 +9,7 @@ using FirstShop.DataAccess.InMemory;
 
 namespace FirstShop.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductCategoryManagerController : Controller
     {
         IRepository<ProductCategory> productCategories;

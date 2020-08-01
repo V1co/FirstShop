@@ -11,6 +11,7 @@ using FirstShop.DataAccess.InMemory;
 
 namespace FirstShop.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductManagerController : Controller
     {
         IRepository<Product> productRepository;

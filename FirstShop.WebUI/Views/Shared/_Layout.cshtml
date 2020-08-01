@@ -23,12 +23,14 @@
                     @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </li>
                 <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })</li>
-                
+                @if (Request.IsAuthenticated && User.IsInRole("Admin")) { 
+                <li>@Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })</li>}
+
+
             </ul>
             @Html.Partial("_LoginPartial")
             @{ Html.RenderAction("BasketSummary", "Basket");
-            }
+                    }
         </div>
     </nav>
 
