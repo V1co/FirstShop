@@ -206,6 +206,10 @@
     <Compile Include="Migrations\202007291200131_AddBasket.Designer.cs">
       <DependentUpon>202007291200131_AddBasket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008011027304_AddedOrders.cs" />
+    <Compile Include="Migrations\202008011027304_AddedOrders.Designer.cs">
+      <DependentUpon>202008011027304_AddedOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -383,6 +387,8 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Basket\Index.cshtml" />
     <Content Include="Views\Basket\BasketSummary.cshtml" />
+    <Content Include="Views\Basket\Checkout.cshtml" />
+    <Content Include="Views\Basket\ThankYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -423,6 +429,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007291200131_AddBasket.resx">
       <DependentUpon>202007291200131_AddBasket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008011027304_AddedOrders.resx">
+      <DependentUpon>202008011027304_AddedOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

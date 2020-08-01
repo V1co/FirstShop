@@ -11,11 +11,13 @@ namespace FirstShop.WebUI.Controllers
     public class BasketController : Controller
     {
         IBasketService basketService;
+        IOrderService orderService;
 
         // GET: Basket
-        public BasketController(IBasketService BasketService)
+        public BasketController(IBasketService BasketService, IOrderService OrderService)
         {
             this.basketService = BasketService;
+            this.orderService = OrderService;
         }
 
         public ActionResult Index() {
@@ -43,5 +45,32 @@ namespace FirstShop.WebUI.Controllers
 
             return PartialView(basketSummary);
         }
+
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Checkout(Order order)
+        {
+            var basketItems = basketService.GetBasketItems(this.HttpContext);
+            order.OrderStatus = "Order Created";
+
+            // process payment
+
+            order.OrderStatus = "Payment Processed";
+            orderService.CreateOrder(order, basketItems);
+            basketService.ClearBasket(this.HttpContext);
+
+            return RedirectToAction("ThankYou", new { orderId = order.Id });
+        }
+
+        public ActionResult ThankYou(string orderId)
+        {
+            ViewBag.OrderId = orderId;
+            return View();
+        }
+
     }
 }
