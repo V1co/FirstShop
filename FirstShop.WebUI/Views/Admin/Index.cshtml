@@ -1,0 +1,19 @@
+﻿@{
+ViewBag.Title = "Admin";
+}
+
+<h2>Admin Pages</h2>
+<div class="col-md-6">
+    <h4>Product Management</h4>
+    <div class="list-group">
+        @Html.ActionLink("Product Categories", "Index", "ProductCategoryManager", null, new { @class = "nav-link" })
+        @Html.ActionLink("Product", "Index", "ProductManager", null, new { @class = "nav-link" })
+    </div>
+</div>
+
+<div class="col-md-6">
+    <h4>Order Management</h4>
+    <div class="list-group">
+        @Html.ActionLink("Orders", "Index", "OrderManager", null, new { @class = "nav-link"})
+    </div>
+</div>
